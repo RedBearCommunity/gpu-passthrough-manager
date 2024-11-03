@@ -8,9 +8,9 @@ no idea if it works with other distros, i have no idea at all for most of it.
 
 only tested on cachyos / arch. 
 
-dracut = untested
-initramfs = untested
-mkinitcpio = tested
+dracut = untested |
+initramfs = untested |
+mkinitcpio = tested |
 
 please write if you have issues
 
