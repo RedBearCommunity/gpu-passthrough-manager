@@ -144,13 +144,13 @@ class VFIOConfigurator(Gtk.Application):
                 subprocess.run(["mkinitcpio", "-P"], check=True)
             elif "endeavouros" in os_release:
                 if os.path.isfile("/usr/bin/dracut"):
-                    subprocess.run(["dracut", "--force"], check=True)
+                    subprocess.run(["update_dracut_image"], check=True)
                 else:
                     subprocess.run(["mkinitcpio", "-P"], check=True)
             elif "ubuntu" in os_release or "debian" in os_release:
                 subprocess.run(["update-initramfs", "-u"], check=True)
             elif "fedora" in os_release:
-                subprocess.run(["dracut", "--force"], check=True)
+                subprocess.run(["update_dracut_image"], check=True)
             else:
                 print("OS not recognized. Please update initramfs manually.")
         except Exception as e:
