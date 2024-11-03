@@ -4,12 +4,10 @@ import subprocess
 import re
 import os
 import sys
-
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
-
-# Suppress GTK session bus warning
 os.environ["DBUS_SESSION_BUS_ADDRESS"] = ""
+
 
 class VFIOConfigurator(Gtk.Application):
     def __init__(self):
@@ -22,24 +20,20 @@ class VFIOConfigurator(Gtk.Application):
             print("Error: GTK could not be initialized. Ensure you are running in a graphical environment.")
             sys.exit(1)
 
-        # Set up the main application window
         self.window = Gtk.ApplicationWindow(application=app)
         self.window.set_title("VFIO Configurator")
         self.window.set_default_size(400, 300)
 
-        # Main vertical box layout
         main_vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         main_vbox.set_margin_top(10)
         main_vbox.set_margin_bottom(10)
         main_vbox.set_margin_start(10)
         main_vbox.set_margin_end(10)
 
-        # Scrollable area for the device buttons
         scrollable_area = Gtk.ScrolledWindow()
         scrollable_area.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scrollable_area.set_vexpand(True)
 
-        # Container for dynamically created device buttons
         device_button_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         for vga, audio, driver in self.device_pairs:
             vga_desc = f"{vga[0]} VGA: {vga[1]}:{vga[2]}"
@@ -52,19 +46,17 @@ class VFIOConfigurator(Gtk.Application):
         scrollable_area.set_child(device_button_box)
         main_vbox.append(scrollable_area)
 
-        # Bottom button box for delete and reboot buttons
         button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
 
-        # Set both buttons to expand equally within the box
         delete_button = Gtk.Button(label="Delete /etc/modprobe.d/vfio.conf")
-        delete_button.set_size_request(0, 40)  # Set minimum height but let width adjust
-        delete_button.set_hexpand(True)  # Allow it to expand horizontally
+        delete_button.set_size_request(0, 40) 
+        delete_button.set_hexpand(True)  
         delete_button.connect("clicked", self.on_delete_button_clicked)
         button_box.append(delete_button)
 
         reboot_button = Gtk.Button(label="Reboot")
-        reboot_button.set_size_request(0, 40)  # Set minimum height but let width adjust
-        reboot_button.set_hexpand(True)  # Allow it to expand horizontally
+        reboot_button.set_size_request(0, 40) 
+        reboot_button.set_hexpand(True)  
         reboot_button.connect("clicked", self.on_reboot_button_clicked)
         button_box.append(reboot_button)
 
@@ -142,7 +134,6 @@ class VFIOConfigurator(Gtk.Application):
         dialog.present()
 
     def on_reboot_button_clicked(self, button):
-        # Confirmation dialog for reboot
         dialog = Gtk.MessageDialog(
             transient_for=self.window,
             modal=True,
