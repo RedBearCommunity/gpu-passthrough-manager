@@ -161,11 +161,7 @@ class VFIOConfigurator(Gtk.Application):
 
 def main():
     # Check for root privileges; use sudo if not running as root
-    if os.geteuid() == 0 and "DBUS_SESSION_BUS_ADDRESS" not in os.environ:
-    dbus_address = subprocess.check_output(
-        "echo $DBUS_SESSION_BUS_ADDRESS", shell=True, text=True).strip()
-    if dbus_address:
-        os.environ["DBUS_SESSION_BUS_ADDRESS"] = dbus_address        
+    if os.geteuid() != 0:
         print("Requesting root privileges...")
         script_path = os.path.abspath(__file__)
         subprocess.call(["sudo", sys.executable, script_path] + sys.argv[1:])
