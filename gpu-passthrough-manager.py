@@ -35,7 +35,7 @@ def detect_devices():
             match = re.search(r'\[(\w{4}):(\w{4})\]', line)
             if match:
                 vendor_id, device_id = match.groups()
-                driver = "amdgpu" if "AMD" in description else "nvidia" if "NVIDIA" in description else "unknown"
+                driver = "amdgpu" if "AMD" in description else "nvidia" if "NVIDIA" in description else "nouveau" if "NOUVEAU" in description else "unknown"
                 devices.append(GPUDevice(pci_id, description, vendor_id, device_id, driver))
             else:
                 print(f"Skipping line with unexpected format: {line}")
