@@ -1,6 +1,6 @@
 # Maintainer: Your Name <your.email@example.com>
 pkgname=gpu-passthrough-manager
-pkgver=1.0.0
+pkgver=2.0.0
 pkgrel=1
 pkgdesc="A GTK-based tool for configuring VFIO options on Linux"
 arch=('any')
