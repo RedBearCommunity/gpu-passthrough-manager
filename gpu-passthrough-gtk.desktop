@@ -3,6 +3,6 @@ Type=Application
 Name=GPU Passthrough Manager
 Comment=Configure VFIO GPU Passthrough
 Exec=sudo -E /usr/bin/gpu-passthrough-gtk
-Icon=/usr/share/icons/vfio-icon.png
+Icon=/usr/share/icons/vfio-icon-gtk.png
 Terminal=true
 Categories=System;Administration;
