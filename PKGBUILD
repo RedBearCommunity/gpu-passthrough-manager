@@ -9,7 +9,7 @@ license=('MIT')            # replace with the correct license
 depends=('python' 'gtk4')
 source=("gpu-passthrough-gtk.py"
         "gpu-passthrough-gtk.desktop"
-        "vfio-icon.png")   # Add your icon file here if you have one
+        "vfio-icon-gtk.png")   # Add your icon file here if you have one
 sha256sums=('SKIP'
             'SKIP'
             'SKIP')        # Replace 'SKIP' with actual checksums if needed
@@ -22,5 +22,5 @@ package() {
     install -Dm644 "$srcdir/gpu-passthrough-gtk.desktop" "$pkgdir/usr/share/applications/gpu-passthrough-gtk.desktop"
     
     # Install the icon if you have one
-    install -Dm644 "$srcdir/vfio-icon.png" "$pkgdir/usr/share/icons/vfio-icon.png"
+    install -Dm644 "$srcdir/vfio-icon-gtk.png" "$pkgdir/usr/share/icons/vfio-icon-gtk.png"
 }
