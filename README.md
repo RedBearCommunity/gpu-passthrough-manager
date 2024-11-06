@@ -1,5 +1,5 @@
 # gpu-passthrough-gtk
-based off of gt3 since the gtk4 version didnt have nice themes
+based off of gtk3 since the gtk4 version didnt have nice themes
 
 not based off of https://github.com/uwzis/GPU-Passthrough-Manager ; i just stole his icon violently, and his program no longer works so i made mine (thanks to him all seriousness)
 
