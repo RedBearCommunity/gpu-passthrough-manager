@@ -1,3 +1,4 @@
+# gpu-passthrough-gtk
 not based off of https://github.com/uwzis/GPU-Passthrough-Manager ; i just stole his icon violently, and his program no longer works so i made mine (thanks to him all seriousness)
 
 ![image](https://github.com/user-attachments/assets/8b6f93ca-aa7e-455c-a30c-c716b6a4703f)
