@@ -9,12 +9,13 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 class GPUDevice:
-    def __init__(self, pci_id, description, vendor_id, device_id, driver):
+    def __init__(self, pci_id, description, vendor_id, device_id, driver, model_name):
         self.pci_id = pci_id
         self.description = description
         self.vendor_id = vendor_id
         self.device_id = device_id
         self.driver = driver
+        self.model_name = model_name
 
 def run_command(command):
     try:
@@ -35,8 +36,28 @@ def detect_devices():
             match = re.search(r'\[(\w{4}):(\w{4})\]', line)
             if match:
                 vendor_id, device_id = match.groups()
-                driver = "amdgpu" if "AMD" in description else "nvidia" if "NVIDIA" in description else "nouveau" if "NOUVEAU" in description else "unknown"
-                devices.append(GPUDevice(pci_id, description, vendor_id, device_id, driver))
+                driver = (
+                    "amdgpu" if "AMD" in description else
+                    "nvidia" if "NVIDIA" in description else
+                    "nouveau" if "NOUVEAU" in description else
+                    "unknown"
+                )
+
+                # Extract model name
+                description_after_colon = description.split(":", 1)[1].strip() if ":" in description else description
+                square_bracket_contents = re.findall(r'\[([^\]]+)\]', description_after_colon)
+                # Exclude vendor_id:device_id and any numeric IDs
+                model_names = [
+                    s for s in square_bracket_contents
+                    if s != f"{vendor_id}:{device_id}" and not re.match(r'^\d+$', s) and not re.match(r'^\d{4}$', s)
+                ]
+                if model_names:
+                    model_name = model_names[-1]
+                else:
+                    # If no square brackets, perhaps use the text after the colon
+                    model_name = description_after_colon.strip()
+
+                devices.append(GPUDevice(pci_id, description, vendor_id, device_id, driver, model_name))
             else:
                 print(f"Skipping line with unexpected format: {line}")
 
@@ -74,7 +95,7 @@ class GPUPassthroughManager(Gtk.Window):
             device_button_box.pack_start(Gtk.Label(label="No GPU-Audio pairs detected."), False, False, 0)
         else:
             for gpu, audio in self.paired_devices:
-                button_label = f"{gpu.driver} [{gpu.vendor_id}:{gpu.device_id}] [{audio.vendor_id}:{audio.device_id}]"
+                button_label = f"{gpu.model_name} [{gpu.vendor_id}:{gpu.device_id}] [{audio.vendor_id}:{audio.device_id}]"
                 button = Gtk.Button(label=button_label)
                 button.connect("clicked", self.on_device_button_clicked, gpu, audio)
                 device_button_box.pack_start(button, False, False, 0)
@@ -172,4 +193,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
