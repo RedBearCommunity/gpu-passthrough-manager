@@ -1,7 +1,6 @@
 not based off of https://github.com/uwzis/GPU-Passthrough-Manager ; i just stole his icon violently, and his program no longer works so i made mine (thanks to him all seriousness)
 
-![Screenshot_2024-11-05_00-12-20](https://github.com/user-attachments/assets/d411c225-e357-4b80-8fa2-ca9c499cfbcd)
-
+![image](https://github.com/user-attachments/assets/8b6f93ca-aa7e-455c-a30c-c716b6a4703f)
 
 supposed to pair vga groups and audio groups from lspci and show an output of them
 
