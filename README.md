@@ -21,8 +21,10 @@ please write if you have issues
 
 run
 
-git clone https://github.com/azurkytheturkey/gpu-passthrough-gtk
-cd gpu-passthrough-gtk
-makepkg -si
+`git clone https://github.com/azurkytheturkey/gpu-passthrough-gtk`
+
+`cd gpu-passthrough-gtk`
+
+`makepkg -si`
 
 ![image](https://github.com/user-attachments/assets/966884b9-503e-42c6-ab38-6116dfbcfadd)
